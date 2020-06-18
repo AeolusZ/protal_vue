@@ -1,37 +1,51 @@
 <template>
-  <div id="root" class="main-container flex">
-    <div class="app-menu">
-      <Menu></Menu>
-    </div>
-    <div class="app-page flex-1">
-      <!-- 子应用盒子 -->
-      <div id="root-view" class="app-view-box" v-html="content"></div>
-    </div>
-    
+  <div id="protalApp">
+    <template v-if="!isChildApp">
+        <router-view/>
+    </template>
+    <template v-show="isChildApp">
+        <Main :loading="loading" :content="content"></Main>
+    </template>
   </div>
 </template>
 
 <script>
-import Menu from './menu.vue'
+import Main from '@/views/Main'
 export default {
-  name: 'root-view',
+  // name: 'root-view',
   components: {
-     Menu,   
+     Main,   
   },
   props: {
       loading: Boolean,
       content: String 
   },
+  data(){
+    return {
+    }
+  },
+  computed: {
+      isChildApp() {
+        if(this.$route.path.match('/bbb') || this.$route.path.match('/aaa')){
+          return true;
+        }else{
+          return false;
+        }
+      }
+  },
+  methods: {
+  }
 }
 </script>
 
 <style>
 html,body { height: 100%; padding: 0; margin: 0; }
-#root {
+#protalApp {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  overflow: hidden;
   width: 100%;
   height: 100vh;
 }
@@ -45,12 +59,11 @@ html,body { height: 100%; padding: 0; margin: 0; }
 .flex-1 {
   flex:1
 }
-.app-menu {
-  width: 300px;
-  height: 100%;
+.flex-horizonal-center {
+  justify-content: center;
 }
-.el-menu {
-  height: 100%;
+.flex-vertical-center {
+  align-items: center;
 }
 
 </style>

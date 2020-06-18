@@ -1,21 +1,21 @@
-// import Vue from 'vue'
-// import Router from 'vue-router'
-// // import HelloWorld from '@/components/HelloWorld'
-// // import BaiDu from '@/components/baidu'
+import Vue from 'vue'
+import Router from 'vue-router'
+import Login from '@/views/Login'
 
-// Vue.use(Router)
+Vue.use(Router)
 
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/aaa',
-//       name: 'HelloWorld',
-//       component: aaa
-//     },
-//     {
-//       path: '/bbb',
-//       name: 'BaiDu',
-//       component: bbb
-//     }
-//   ]
-// })
+// 防止重复加载页面报错
+const originalPush = Router.prototype.push
+   Router.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
+
+export default new Router({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            component: Login
+        },
+    ]
+})

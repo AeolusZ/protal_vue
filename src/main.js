@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
+// import Main from '@/views/Main'
 import store from './store'
 import router from './router/index'
     // 导入qiankun内置函数
 import {
       registerMicroApps, // 注册子应用
       runAfterFirstMounted, // 第一个子应用装载完毕
-      setDefaultMountApp, // 设置默认装载子应用
+    //   setDefaultMountApp, // 设置默认装载子应用
       start // 启动
 } from "qiankun";
 
@@ -97,7 +98,7 @@ registerMicroApps(
   )
   
   // 设置默认子应用,参数与注册子应用时genActiveRule("/aaa")函数内的参数一致
-setDefaultMountApp("/bbb");
+// setDefaultMountApp("/bbb");
 
 // 第一个子应用加载完毕回调
 runAfterFirstMounted(()=>{});
